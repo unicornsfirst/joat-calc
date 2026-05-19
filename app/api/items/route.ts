@@ -15,11 +15,20 @@ export async function GET() {
 
   for (const key in items) {
     const item = items[key];
+    const maps = [];
+    for (const map in item.maps) {
+      if (item.maps[map] === true) {
+        maps.push(map);
+      }
+    }
+    //console.log(maps);
+
     parsedItems.push({
       key: key,
       name: item.name,
       stats: Object.keys(item.stats),
       image: `https://ddragon.leagueoflegends.com/cdn/16.10.1/img/item/${item.image.full}`,
+      maps: maps,
     });
   }
   console.log(parsedItems.length);
