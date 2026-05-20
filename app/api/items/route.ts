@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
+  console.log("maps");
   const response = await fetch(
     "https://ddragon.leagueoflegends.com/cdn/16.10.1/data/en_US/item.json",
   );
@@ -13,7 +14,7 @@ export async function GET() {
 
   const parsedItems = [];
 
-  for (const key in items) {
+  outer: for (const key in items) {
     const item = items[key];
     const maps = [];
     for (const map in item.maps) {
@@ -22,6 +23,11 @@ export async function GET() {
       }
     }
     //console.log(maps);
+    // for (const map of maps) {
+    //   if (mapBlacklist.includes(map)) {
+    //     continue outer;
+    //   }
+    // }
 
     parsedItems.push({
       key: key,
